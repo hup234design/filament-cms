@@ -11,25 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('index_pages', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('summary')
-                ->nullable();
             $table->json('content')
                 ->nullable();
             $table->json('blocks')
                 ->nullable();
-            $table->foreignId('event_category_id')
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete();
-            $table->date('date');
-            $table->string('start_time')->nullable();
-            $table->string('end_time')->nullable();
-            $table->boolean('is_visible')
-                ->default(false);
             $table->timestamps();
         });
     }
@@ -39,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('index_pages');
     }
 };

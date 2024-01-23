@@ -7,6 +7,7 @@ use Filament\Panel;
 use Filament\Contracts\Plugin;
 use Hup234design\FilamentCms\Filament\Resources\Events\EventCategoryResource;
 use Hup234design\FilamentCms\Filament\Resources\Events\EventResource;
+use Hup234design\FilamentCms\Filament\Resources\Pages\IndexPageResource;
 use Hup234design\FilamentCms\Filament\Resources\Pages\PageResource;
 use Hup234design\FilamentCms\Filament\Resources\Posts\PostCategoryResource;
 use Hup234design\FilamentCms\Filament\Resources\Posts\PostResource;
@@ -32,6 +33,7 @@ class FilamentCmsPlugin implements Plugin
         $panel
             ->resources([
                 PageResource::class,
+                IndexPageResource::class,
                 PostCategoryResource::class,
                 PostResource::class,
                 EventCategoryResource::class,
@@ -73,7 +75,8 @@ class FilamentCmsPlugin implements Plugin
 //                            ->required()
 //                    ])
 //                    ->itemType('Dropdown', [])
-            ]);
+            ])
+            ->viteTheme('resources/css/filament/admin/theme.css');
     }
 
     public function boot(Panel $panel): void

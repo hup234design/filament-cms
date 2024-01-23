@@ -14,6 +14,7 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
         $package->name(static::$name)
             ->hasMigrations([
                 'create_pages_table',
+                'create_index_pages_table',
                 'create_post_categories_table',
                 'create_posts_table',
                 'create_event_categories_table',
@@ -23,7 +24,10 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
                 'create_testimonials_table',
             ])
             ->hasViews('cms')
-            ->hasRoute('web');
+            ->hasRoute('web')
+            ->hasCommands([
+                Commands\SetupCommand::class,
+            ]);
     }
 
     public function packageRegistered(): void
