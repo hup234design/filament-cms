@@ -47,7 +47,7 @@ class Page extends Model implements Sortable
         static::addGlobalScope('order', function (Builder $builder) {
             $builder
                 ->orderBy('is_home', 'desc')
-                ->orderBy('sort_order', 'asc');
+                ->orderBy('order_column', 'asc');
         });
     }
 }
