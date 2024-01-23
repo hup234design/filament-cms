@@ -2,6 +2,7 @@
 
 namespace Hup234design\FilamentCms;
 
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -25,9 +26,16 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
             ])
             ->hasViews('cms')
             ->hasRoute('web')
+            ->hasConfigFile(['cms'])
             ->hasCommands([
                 Commands\SetupCommand::class,
-            ]);
+            ])
+            ->hasInstallCommand(function(InstallCommand $command) {
+                $command
+                    ->publishConfigFile()
+                    ->publishMigrations()
+                    ->askToRunMigrations();
+            });
     }
 
     public function packageRegistered(): void
