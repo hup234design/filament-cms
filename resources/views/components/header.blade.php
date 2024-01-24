@@ -7,11 +7,6 @@
         </div>
         <div class="inline-block divide-y">
             <ul class="pb-4 flex items-center justify-end divide-x divide-gray-100">
-                <li class="leading-none px-2">
-                    <a href="{{ route('pages.home') }}" class="hover:cursor-pointer text-gray-100 font-semibold text-lg leading-none">
-                        Home
-                    </a>
-                </li>
                 @foreach( \Hup234design\FilamentCms\Models\Page::where('is_home',false)->visible()->pluck('title','slug') as $slug=>$title)
                     <li class="leading-none px-2">
                         <a href="{{ route('pages.page', $slug) }}" class="hover:cursor-pointer text-gray-100 font-semibold text-lg leading-none">
@@ -21,6 +16,11 @@
                 @endforeach
             </ul>
             <ul class="pt-4 flex items-center justify-end divide-x divide-gray-100">
+                <li class="leading-none px-2">
+                    <a href="{{ route('pages.home') }}" class="hover:cursor-pointer text-gray-100 font-semibold text-lg leading-none">
+                        Home
+                    </a>
+                </li>
                 <li class="leading-none px-2">
                     <a href="{{ route('services.index') }}" class="hover:cursor-pointer text-gray-100 font-semibold text-lg leading-none">
                         Services
