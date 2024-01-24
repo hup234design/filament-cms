@@ -2,6 +2,7 @@
 
 namespace Hup234design\FilamentCms;
 
+use Filament\Forms\Components\Select;
 use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use Filament\Contracts\Plugin;
@@ -14,6 +15,10 @@ use Hup234design\FilamentCms\Filament\Resources\Posts\PostResource;
 use Hup234design\FilamentCms\Filament\Resources\Services\ServiceCategoryResource;
 use Hup234design\FilamentCms\Filament\Resources\Services\ServiceResource;
 use Hup234design\FilamentCms\Filament\Resources\Testimonials\TestimonialResource;
+use Hup234design\FilamentCms\Models\IndexPage;
+use Hup234design\FilamentCms\Models\Page;
+use Illuminate\Support\Facades\Schema;
+use RyanChandler\FilamentNavigation\FilamentNavigation;
 
 class FilamentCmsPlugin implements Plugin
 {
@@ -56,25 +61,25 @@ class FilamentCmsPlugin implements Plugin
             ])
             ->breadcrumbs(false)
             ->plugins([
-//                CustomFilamentNavigation::make()
-//                    ->itemType('Home Page', [])
-//                    ->itemType('Index Page', [
-//                        Select::make('index_page_id')
-//                            ->options(Schema::hasTable('index_pages')
-//                                ? IndexPage::all()->pluck('title','id')
-//                                : []
-//                            )
-//                            ->required()
-//                    ])
-//                    ->itemType('Page', [
-//                        Select::make('page_id')
-//                            ->options(Schema::hasTable('index_pages')
-//                                ? Page::where('is_home',false)->pluck('title','id')
-//                                : []
-//                            )
-//                            ->required()
-//                    ])
-//                    ->itemType('Dropdown', [])
+                FilamentNavigation::make()
+                    ->itemType('Home Page', [])
+                    ->itemType('Index Page', [
+                        Select::make('index_page_id')
+                            ->options(Schema::hasTable('index_pages')
+                                ? IndexPage::all()->pluck('title','id')
+                                : []
+                            )
+                            ->required()
+                    ])
+                    ->itemType('Page', [
+                        Select::make('page_id')
+                            ->options(Schema::hasTable('index_pages')
+                                ? Page::where('is_home',false)->pluck('title','id')
+                                : []
+                            )
+                            ->required()
+                    ])
+                    ->itemType('Dropdown', [])
             ])
             ->viteTheme('resources/css/filament/admin/theme.css');
     }
