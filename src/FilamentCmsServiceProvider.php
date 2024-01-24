@@ -18,8 +18,6 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
                 'create_index_pages_table',
                 'create_post_categories_table',
                 'create_posts_table',
-                'create_event_categories_table',
-                'create_events_table',
                 'create_service_categories_table',
                 'create_services_table',
                 'create_testimonials_table',

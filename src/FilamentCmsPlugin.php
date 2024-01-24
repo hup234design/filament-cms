@@ -6,8 +6,6 @@ use Filament\Forms\Components\Select;
 use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use Filament\Contracts\Plugin;
-use Hup234design\FilamentCms\Filament\Resources\Events\EventCategoryResource;
-use Hup234design\FilamentCms\Filament\Resources\Events\EventResource;
 use Hup234design\FilamentCms\Filament\Resources\Pages\IndexPageResource;
 use Hup234design\FilamentCms\Filament\Resources\Pages\PageResource;
 use Hup234design\FilamentCms\Filament\Resources\Posts\PostCategoryResource;
@@ -41,8 +39,6 @@ class FilamentCmsPlugin implements Plugin
                 IndexPageResource::class,
                 PostCategoryResource::class,
                 PostResource::class,
-                EventCategoryResource::class,
-                EventResource::class,
                 ServiceCategoryResource::class,
                 ServiceResource::class,
                 TestimonialResource::class
