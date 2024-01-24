@@ -49,6 +49,16 @@ class SetupCommand extends Command
                 "--tag" => "honeypot-config",
             ]);
 
+            // spatie/laravel-cookie-consent
+            $this->call('vendor:publish', [
+                "--provider" => "Spatie\CookieConsent\CookieConsentServiceProvider",
+                "--tag" => "cookie-consent-config",
+            ]);
+            $this->call('vendor:publish', [
+                "--provider" => "Spatie\CookieConsent\CookieConsentServiceProvider",
+                "--tag" => "cookie-consent-views",
+            ]);
+
             // awcodes/filament-tiptap-editor
             $this->call('vendor:publish', [
                 "--tag" => "filament-tiptap-editor-config",
