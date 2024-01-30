@@ -1,8 +1,6 @@
 <x-cms::layouts.app>
 
-    <div class="prose max-w-none">
-        <h1>Testimonials</h1>
-    </div>
+    <x-cms::page-header heading="Testimonials" />
 
     <div class="mt-16 space-y-12">
         @foreach($testimonials as $testimonial)

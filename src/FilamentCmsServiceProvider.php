@@ -2,6 +2,10 @@
 
 namespace Hup234design\FilamentCms;
 
+use Hup234design\FilamentCms\Commands\RegenerateMediaCurations;
+use Hup234design\FilamentCms\Components\MediaImageRenderer;
+use Hup234design\FilamentCms\Livewire\Blocks\EditorBlock;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -14,6 +18,8 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
     {
         $package->name(static::$name)
             ->hasMigrations([
+                'create_mediables_table',
+                'create_headerables_table',
                 'create_pages_table',
                 'create_index_pages_table',
                 'create_post_categories_table',
@@ -24,10 +30,14 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
             ])
             ->hasViews('cms')
             ->hasRoute('web')
-            ->hasConfigFile(['cms'])
+            ->hasConfigFile(['cms','curator','filament-tiptap-editor'])
             ->hasCommands([
                 Commands\SetupCommand::class,
+                RegenerateMediaCurations::class,
             ])
+            ->hasViewComponents('cms',
+                MediaImageRenderer::class)
+            ->hasViews()
             ->hasInstallCommand(function(InstallCommand $command) {
                 $command
                     ->publishConfigFile()
@@ -43,7 +53,9 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        //
+        Livewire::component('editor-block', EditorBlock::class);
+
+        //Blade::component('curator-glider', Glider::class);
     }
 }
 

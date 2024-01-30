@@ -2,17 +2,18 @@
 
 namespace Hup234design\FilamentCms;
 
+use Awcodes\Curator\CuratorPlugin;
 use Filament\Forms\Components\Select;
 use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use Filament\Contracts\Plugin;
-use Hup234design\FilamentCms\Filament\Resources\Pages\IndexPageResource;
-use Hup234design\FilamentCms\Filament\Resources\Pages\PageResource;
-use Hup234design\FilamentCms\Filament\Resources\Posts\PostCategoryResource;
-use Hup234design\FilamentCms\Filament\Resources\Posts\PostResource;
-use Hup234design\FilamentCms\Filament\Resources\Services\ServiceCategoryResource;
-use Hup234design\FilamentCms\Filament\Resources\Services\ServiceResource;
-use Hup234design\FilamentCms\Filament\Resources\Testimonials\TestimonialResource;
+use Hup234design\FilamentCms\Resources\Pages\IndexPageResource;
+use Hup234design\FilamentCms\Resources\Pages\PageResource;
+use Hup234design\FilamentCms\Resources\Posts\PostCategoryResource;
+use Hup234design\FilamentCms\Resources\Posts\PostResource;
+use Hup234design\FilamentCms\Resources\Services\ServiceCategoryResource;
+use Hup234design\FilamentCms\Resources\Services\ServiceResource;
+use Hup234design\FilamentCms\Resources\Testimonials\TestimonialResource;
 use Hup234design\FilamentCms\Models\IndexPage;
 use Hup234design\FilamentCms\Models\Page;
 use Illuminate\Support\Facades\Schema;
@@ -57,6 +58,11 @@ class FilamentCmsPlugin implements Plugin
             ])
             ->breadcrumbs(false)
             ->plugins([
+                CuratorPlugin::make()
+                    ->label('Media')
+                    ->pluralLabel('Media')
+                    ->navigationIcon('heroicon-o-photo')
+                    ->navigationCountBadge(),
                 FilamentNavigation::make()
                     ->itemType('Home Page', [])
                     ->itemType('Index Page', [

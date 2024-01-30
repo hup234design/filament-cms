@@ -10,8 +10,12 @@
 
 <x-cms::header />
 
+@section('header')
+@show
+
+
 <main class="my-16">
-    <div class="max-w-7xl mx-auto px-8">
+    <div class="max-w-screen-2xl mx-auto px-8">
         {{ $slot }}
     </div>
 </main>

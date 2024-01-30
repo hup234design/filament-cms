@@ -2,8 +2,8 @@
 
 namespace Hup234design\FilamentCms\Models;
 
-//use Hup234design\FilamentCms\Concerns\HasHeader;
-//use Hup234design\FilamentCms\Concerns\HasMediables;
+use Hup234design\FilamentCms\Concerns\HasHeader;
+use Hup234design\FilamentCms\Concerns\HasMediables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 //use RalphJSmit\Laravel\SEO\Support\HasSEO;
@@ -14,8 +14,8 @@ class Page extends Model implements Sortable
 {
     use SortableTrait;
     //use HasSEO;
-    //use HasMediables;
-    //use HasHeader;
+    use HasMediables;
+    use HasHeader;
 
     protected $guarded = [];
 

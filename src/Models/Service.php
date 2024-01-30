@@ -2,8 +2,8 @@
 
 namespace Hup234design\FilamentCms\Models;
 
-//use Hup234design\FilamentCms\Concerns\HasHeader;
-//use Hup234design\FilamentCms\Concerns\HasMediables;
+use Hup234design\FilamentCms\Concerns\HasHeader;
+use Hup234design\FilamentCms\Concerns\HasMediables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Service extends Model
 {
     //use HasSEO;
-    //use HasMediables;
-    //use HasHeader;
+    use HasMediables;
+    use HasHeader;
 
     protected $guarded = [];
 

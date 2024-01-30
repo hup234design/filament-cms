@@ -1,5 +1,7 @@
 <x-cms::layouts.posts>
 
+    <x-cms::page-header heading="Posts" :subheading="$category->title"  />
+
     <div class="prose max-w-none">
         <h1>Posts | {{ $category->title }}</h1>
     </div>

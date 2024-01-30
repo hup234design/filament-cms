@@ -1,8 +1,6 @@
 <x-cms::layouts.posts>
 
-    <div class="prose max-w-none">
-        <h1>Posts</h1>
-    </div>
+    <x-cms::page-header heading="Posts" />
 
     <div class="mt-12 space-y-12">
         @foreach( $posts as $post )
