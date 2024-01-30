@@ -1,6 +1,6 @@
 <x-cms::layouts.services>
 
-    <x-cms::page-header heading="Services" />
+    <x-cms::page-header title="Services" />
 
     <div class="mt-12 space-y-12">
         @foreach( $services as $service )

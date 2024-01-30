@@ -1,6 +1,6 @@
 <x-cms::layouts.services>
 
-    <x-cms::page-header :header="$service->header" :heading="$service->title" />
+    <x-cms::page-header :header="$service->header" :title="$service->title" />
 
     <div class="prose max-w-none">
         <h1 class="mb-2">{{ $service->title }}</h1>

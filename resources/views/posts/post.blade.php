@@ -1,6 +1,6 @@
 <x-cms::layouts.posts>
 
-    <x-cms::page-header :record="$post" />
+    <x-cms::page-header :header="$post->header" :title="$post->title" />
 
     <div class="prose max-w-none">
         <h1 class="mb-2">{{ $post->title }}</h1>

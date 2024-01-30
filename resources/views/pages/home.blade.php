@@ -1,6 +1,6 @@
 <x-cms::layouts.app>
 
-    <x-cms::page-header :header="$page->header" :heading="$page->title" />
+    <x-cms::page-header :header="$page->header" :title="$page->title" />
 
     <div class="prose max-w-none">
         <h1>{{ $page->title }}</h1>

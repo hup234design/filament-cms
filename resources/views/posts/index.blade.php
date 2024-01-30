@@ -1,6 +1,6 @@
 <x-cms::layouts.posts>
 
-    <x-cms::page-header heading="Posts" />
+    <x-cms::page-header title="Posts" />
 
     <div class="mt-12 space-y-12">
         @foreach( $posts as $post )
