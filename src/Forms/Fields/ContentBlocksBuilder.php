@@ -20,7 +20,9 @@ class ContentBlocksBuilder
             ->blocks([
                 EditorBlock::make(),
                 EmployeesBlock::make(),
-                ...config('cms.content_blocks', [])
+                ...array_map(function ($class) {
+                    return $class::make();
+                }, config('cms.content_blocks'))
             ]);
     }
 }
