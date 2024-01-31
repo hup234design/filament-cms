@@ -4,6 +4,7 @@ namespace Hup234design\FilamentCms\Forms\Fields;
 
 use Filament\Forms\Components\Builder;
 use Hup234design\FilamentCms\Livewire\Blocks\EditorBlock;
+use Hup234design\FilamentCms\Livewire\Blocks\EmployeesBlock;
 
 class ContentBlocksBuilder
 {
@@ -18,6 +19,7 @@ class ContentBlocksBuilder
             ->blockNumbers(false)
             ->blocks([
                 EditorBlock::make(),
+                EmployeesBlock::make(),
                 ...config('cms.content_blocks', [])
             ]);
     }

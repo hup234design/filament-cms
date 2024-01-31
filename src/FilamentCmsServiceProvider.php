@@ -5,6 +5,7 @@ namespace Hup234design\FilamentCms;
 use Hup234design\FilamentCms\Commands\RegenerateMediaCurations;
 use Hup234design\FilamentCms\Components\MediaImageRenderer;
 use Hup234design\FilamentCms\Livewire\Blocks\EditorBlock;
+use Hup234design\FilamentCms\Livewire\Blocks\EmployeesBlock;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -27,6 +28,7 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
                 'create_service_categories_table',
                 'create_services_table',
                 'create_testimonials_table',
+                'create_employees_table',
             ])
             ->hasViews('cms')
             ->hasRoute('web')
@@ -54,6 +56,7 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         Livewire::component('editor-block', EditorBlock::class);
+        Livewire::component('employees-block', EmployeesBlock::class);
 
         //Blade::component('curator-glider', Glider::class);
     }

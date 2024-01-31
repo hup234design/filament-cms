@@ -7,6 +7,7 @@ use Filament\Forms\Components\Select;
 use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use Filament\Contracts\Plugin;
+use Hup234design\FilamentCms\Resources\Employees\EmployeeResource;
 use Hup234design\FilamentCms\Resources\Pages\IndexPageResource;
 use Hup234design\FilamentCms\Resources\Pages\PageResource;
 use Hup234design\FilamentCms\Resources\Posts\PostCategoryResource;
@@ -42,7 +43,8 @@ class FilamentCmsPlugin implements Plugin
                 PostResource::class,
                 ServiceCategoryResource::class,
                 ServiceResource::class,
-                TestimonialResource::class
+                TestimonialResource::class,
+                EmployeeResource::class
             ])
             ->pages([
                 //
