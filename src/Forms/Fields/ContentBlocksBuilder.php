@@ -3,6 +3,7 @@
 namespace Hup234design\FilamentCms\Forms\Fields;
 
 use Filament\Forms\Components\Builder;
+use Hup234design\FilamentCms\Livewire\Blocks\ContactBlock;
 use Hup234design\FilamentCms\Livewire\Blocks\EditorBlock;
 use Hup234design\FilamentCms\Livewire\Blocks\EmployeesBlock;
 
@@ -20,6 +21,7 @@ class ContentBlocksBuilder
             ->blocks([
                 EditorBlock::make(),
                 EmployeesBlock::make(),
+                ContactBlock::make(),
                 ...array_map(function ($class) {
                     return $class::make();
                 }, config('cms.content_blocks'))

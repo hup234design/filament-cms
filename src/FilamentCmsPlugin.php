@@ -10,6 +10,7 @@ use Filament\Contracts\Plugin;
 use Hup234design\FilamentCms\Pages\ManageSettings;
 use Hup234design\FilamentCms\Pages\Navigation;
 use Hup234design\FilamentCms\Resources\Employees\EmployeeResource;
+use Hup234design\FilamentCms\Resources\Enquiries\EnquiryResource;
 use Hup234design\FilamentCms\Resources\Navigation\NavigationResource;
 use Hup234design\FilamentCms\Resources\Pages\IndexPageResource;
 use Hup234design\FilamentCms\Resources\Pages\PageResource;
@@ -48,6 +49,7 @@ class FilamentCmsPlugin implements Plugin
                 ServiceResource::class,
                 TestimonialResource::class,
                 EmployeeResource::class,
+                EnquiryResource::class,
             ])
             ->pages([
                 Navigation::class,

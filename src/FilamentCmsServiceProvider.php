@@ -5,8 +5,10 @@ namespace Hup234design\FilamentCms;
 use Hup234design\FilamentCms\Commands\RegenerateMediaCurations;
 use Hup234design\FilamentCms\Components\AppLayout;
 use Hup234design\FilamentCms\Components\MediaImageRenderer;
+use Hup234design\FilamentCms\Livewire\Blocks\ContactBlock;
 use Hup234design\FilamentCms\Livewire\Blocks\EditorBlock;
 use Hup234design\FilamentCms\Livewire\Blocks\EmployeesBlock;
+use Hup234design\FilamentCms\Livewire\Enquiries\EnquiryForm;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -31,6 +33,7 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
                 'create_services_table',
                 'create_testimonials_table',
                 'create_employees_table',
+                'create_enquiries_table',
             ])
             ->hasViews('cms')
             //->hasRoute('web')
@@ -61,8 +64,11 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        Livewire::component('enquiry-form', EnquiryForm::class);
+
         Livewire::component('editor-block', EditorBlock::class);
         Livewire::component('employees-block', EmployeesBlock::class);
+        Livewire::component('contact-block', ContactBlock::class);
 
         //Blade::component('curator-glider', Glider::class);
     }
