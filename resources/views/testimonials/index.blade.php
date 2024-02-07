@@ -1,4 +1,4 @@
-<x-cms::layouts.app>
+<x-cms-app-layout>
 
     <x-cms::page-header heading="Testimonials" />
 
@@ -22,4 +22,4 @@
         </div>
     @endif
 
-</x-cms::layouts.app>
+</x-cms-app-layout>
