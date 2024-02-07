@@ -5,6 +5,7 @@
         "awcodes/filament-curator": "^3.4",
         "awcodes/filament-table-repeater": "^2.0",
         "awcodes/filament-tiptap-editor": "^3.0",
+        "diglactic/laravel-breadcrumbs": "^8.1",
         "filament/filament": "^3.2",
         "ralphjsmit/laravel-filament-components": "^2.0",
         "ralphjsmit/laravel-filament-seo": "^1.2",
