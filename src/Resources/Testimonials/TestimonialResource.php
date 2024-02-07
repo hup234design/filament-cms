@@ -24,7 +24,7 @@ class TestimonialResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return cms('testimonials_enabled');
+        return cms('testimonials_enabled', false);
     }
 
     public static function getNavigationBadge(): ?string

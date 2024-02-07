@@ -42,7 +42,7 @@ class ServiceResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return cms('services_enabled');
+        return cms('services_enabled', false);
     }
 
     public static function form(Form $form): Form
