@@ -1,4 +1,4 @@
-<x-cms::layouts.app>
+<x-cms-app-layout>
 
     <x-cms::page-header :header="$page->header" :title="$page->title" />
 
@@ -8,4 +8,4 @@
             {!! tiptap_converter()->asHTML($page->content) !!}
         @endif
     </div>
-</x-cms::layouts.app>
+</x-cms-app-layout>

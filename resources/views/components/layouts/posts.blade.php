@@ -1,4 +1,4 @@
-<x-cms::layouts.app>
+<x-cms-app-layout>
     <div class="lg:flex">
         <div class="lg:flex-1">
             {{ $slot }}
@@ -7,4 +7,4 @@
             {{-- --}}
         </div>
     </div>
-</x-cms::layouts.app>
+</x-cms-app-layout>

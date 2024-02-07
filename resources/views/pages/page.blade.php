@@ -1,4 +1,4 @@
-<x-cms::layouts.app>
+<x-cms-app-layout>
 
     <x-cms::page-header :header="$page->header" :title="$page->title" />
 
@@ -24,5 +24,4 @@
             @endforeach
         </div>
     @endif
-
-</x-cms::layouts.app>
+</x-cms-app-layout>

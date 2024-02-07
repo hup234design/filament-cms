@@ -3,6 +3,7 @@
 namespace Hup234design\FilamentCms;
 
 use Hup234design\FilamentCms\Commands\RegenerateMediaCurations;
+use Hup234design\FilamentCms\Components\AppLayout;
 use Hup234design\FilamentCms\Components\MediaImageRenderer;
 use Hup234design\FilamentCms\Livewire\Blocks\EditorBlock;
 use Hup234design\FilamentCms\Livewire\Blocks\EmployeesBlock;
@@ -39,7 +40,7 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
                 RegenerateMediaCurations::class,
             ])
             ->hasViewComponents('cms',
-                MediaImageRenderer::class)
+                AppLayout::class, MediaImageRenderer::class)
             ->hasViews()
             ->hasInstallCommand(function(InstallCommand $command) {
                 $command

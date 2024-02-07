@@ -8,7 +8,7 @@
 </head>
 <body class="antialiased">
 
-<x-cms::header />
+<x-cms::header :menus="$menus" />
 
 @section('header')
 @show
