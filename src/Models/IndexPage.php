@@ -12,7 +12,16 @@ class IndexPage extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'content'    => 'array',
-        'blocks'     => 'array',
+        'content' => 'array',
     ];
+
+    public function scopeEnabled($query)
+    {
+        $query->when(! cms('services_enabled'), function($query) {
+            $query->whereNot('slug','services');
+        })
+        ->when(! cms('testimonials_enabled'), function($query) {
+            $query->whereNot('slug','testimonials');
+        });
+    }
 }

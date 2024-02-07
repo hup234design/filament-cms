@@ -22,6 +22,11 @@ class TestimonialResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return cms('testimonials_enabled');
+    }
+
     public static function getNavigationBadge(): ?string
     {
         return number_format(static::getModel()::count());

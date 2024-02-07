@@ -19,6 +19,7 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
     {
         $package->name(static::$name)
             ->hasMigrations([
+                'create_navigations_table',
                 'create_mediables_table',
                 'create_headerables_table',
                 'create_pages_table',
@@ -31,8 +32,8 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
                 'create_employees_table',
             ])
             ->hasViews('cms')
-            ->hasRoute('web')
-            ->hasConfigFile(['cms','curator','filament-tiptap-editor'])
+            //->hasRoute('web')
+            ->hasConfigFile(['cms','curator','filament-tiptap-editor','filament-tree'])
             ->hasCommands([
                 Commands\SetupCommand::class,
                 RegenerateMediaCurations::class,
@@ -51,6 +52,10 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         parent::packageRegistered();
+
+        $this->app->singleton(FilamentCmsSettings::class, function () {
+            return FilamentCmsSettings::make(storage_path('app/cms-settings.json'));
+        });
     }
 
     public function packageBooted(): void

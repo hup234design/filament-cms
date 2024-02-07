@@ -12,6 +12,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class IndexPageResource extends Resource
 {
@@ -23,7 +24,12 @@ class IndexPageResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return number_format(static::getModel()::count());
+        return number_format(static::getModel()::enabled()->count());
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return IndexPage::enabled();
     }
 
     public static function form(Form $form): Form

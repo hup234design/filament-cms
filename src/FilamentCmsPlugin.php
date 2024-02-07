@@ -7,7 +7,10 @@ use Filament\Forms\Components\Select;
 use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use Filament\Contracts\Plugin;
+use Hup234design\FilamentCms\Pages\ManageSettings;
+use Hup234design\FilamentCms\Pages\Navigation;
 use Hup234design\FilamentCms\Resources\Employees\EmployeeResource;
+use Hup234design\FilamentCms\Resources\Navigation\NavigationResource;
 use Hup234design\FilamentCms\Resources\Pages\IndexPageResource;
 use Hup234design\FilamentCms\Resources\Pages\PageResource;
 use Hup234design\FilamentCms\Resources\Posts\PostCategoryResource;
@@ -44,10 +47,11 @@ class FilamentCmsPlugin implements Plugin
                 ServiceCategoryResource::class,
                 ServiceResource::class,
                 TestimonialResource::class,
-                EmployeeResource::class
+                EmployeeResource::class,
             ])
             ->pages([
-                //
+                Navigation::class,
+                ManageSettings::class
             ])
             ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth('full')
@@ -65,25 +69,25 @@ class FilamentCmsPlugin implements Plugin
                     ->pluralLabel('Media')
                     ->navigationIcon('heroicon-o-photo')
                     ->navigationCountBadge(),
-                FilamentNavigation::make()
-                    ->itemType('Home Page', [])
-                    ->itemType('Index Page', [
-                        Select::make('index_page_id')
-                            ->options(Schema::hasTable('index_pages')
-                                ? IndexPage::all()->pluck('title','id')
-                                : []
-                            )
-                            ->required()
-                    ])
-                    ->itemType('Page', [
-                        Select::make('page_id')
-                            ->options(Schema::hasTable('index_pages')
-                                ? Page::where('is_home',false)->pluck('title','id')
-                                : []
-                            )
-                            ->required()
-                    ])
-                    ->itemType('Dropdown', [])
+//                FilamentNavigation::make()
+//                    ->itemType('Home Page', [])
+//                    ->itemType('Index Page', [
+//                        Select::make('index_page_id')
+//                            ->options(Schema::hasTable('index_pages')
+//                                ? IndexPage::all()->pluck('title','id')
+//                                : []
+//                            )
+//                            ->required()
+//                    ])
+//                    ->itemType('Page', [
+//                        Select::make('page_id')
+//                            ->options(Schema::hasTable('index_pages')
+//                                ? Page::where('is_home',false)->pluck('title','id')
+//                                : []
+//                            )
+//                            ->required()
+//                    ])
+//                    ->itemType('Dropdown', [])
             ])
             ->viteTheme('resources/css/filament/admin/theme.css');
     }

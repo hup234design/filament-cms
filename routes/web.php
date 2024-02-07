@@ -17,19 +17,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['web'])->group(function () {
+//Route::middleware(['web'])->group(function () {
 
-    Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
+Route::controller(TestimonialController::class)
+    ->prefix(cms('testimonials_slug', 'testimonials'))
+    ->group(function () {
+        Route::get('/', 'index')->name('testimonials.index');
+    });
 
-    Route::get('/services/category/{slug}', [ServiceController::class, 'category'])->name('services.category');
-    Route::get('/services/{slug}', [ServiceController::class, 'service'])->name('services.service');
-    Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::controller(ServiceController::class)
+    ->prefix(cms('services_slug', 'services'))
+    ->group(function () {
+        Route::get('/category/{slug}', 'category')->name('services.category');
+        Route::get('/{slug}', 'service')->name('services.service');
+        Route::get('/', 'index')->name('services.index');
+    });
 
-    Route::get('/posts/category/{slug}', [PostController::class, 'category'])->name('posts.category');
-    Route::get('/posts/{slug}', [PostController::class, 'post'])->name('posts.post');
-    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::controller(PostController::class)
+    ->prefix(cms('posts_slug', 'posts'))
+    ->group(function () {
+        Route::get('/category/{slug}', 'category')->name('posts.category');
+        Route::get('/{slug}', 'post')->name('posts.post');
+        Route::get('/', 'index')->name('posts.index');
+    });
 
-    Route::get('/{slug}', [PageController::class, 'page'])->name('pages.page');
-    Route::get('/', [PageController::class, 'home'])->name('pages.home');
-
-});
+Route::controller(PageController::class)
+    ->group(function () {
+        Route::get('/{slug}', 'page')->name('pages.page');
+        Route::get('/', 'home')->name('pages.home');
+    });

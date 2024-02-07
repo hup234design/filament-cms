@@ -8,7 +8,7 @@
         "filament/filament": "^3.2",
         "ralphjsmit/laravel-filament-components": "^2.0",
         "ralphjsmit/laravel-filament-seo": "^1.2",
-        "ryangjchandler/filament-navigation": "^1.0.0-beta4",
+        "solution-forest/filament-tree": "^2.0",
         "spatie/eloquent-sortable": "^4.1",
         "spatie/image": "^2.2",
         "spatie/laravel-cookie-consent": "^3.2",
@@ -21,8 +21,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Hup234design\\FilamentCms\\": "src/"
-        }
+            "Hup234design\\FilamentCms\\": "src/",
+            "Hup234design\\FilamentCms\\Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "config": {
         "sort-packages": true

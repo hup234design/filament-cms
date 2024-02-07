@@ -8,6 +8,7 @@ export default {
         './vendor/filament/**/*.blade.php',
         './vendor/awcodes/filament-curator/resources/**/*.blade.php',
         './vendor/awcodes/filament-tiptap-editor/resources/**/*.blade.php',
+        './vendor/solution-forest/filament-tree/resources/**/*.blade.php',
         './vendor/hup234design/filament-cms/**/*.php',
     ],
 }

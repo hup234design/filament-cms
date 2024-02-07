@@ -40,6 +40,11 @@ class ServiceResource extends Resource
         return number_format(static::getModel()::count());
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return cms('services_enabled');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
