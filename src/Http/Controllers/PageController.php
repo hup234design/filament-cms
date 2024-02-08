@@ -11,7 +11,7 @@ class PageController extends Controller
     {
         $page = Page::where('is_home', true)->first();
         if( $page ) {
-            return view('cms::pages.home', compact('page'));
+            return view('pages.home', compact('page'));
         }
         return view('welcome');
 
@@ -20,6 +20,6 @@ class PageController extends Controller
     public function page($slug)
     {
         $page = Page::whereSlug($slug)->firstOrFail();
-        return view('cms::pages.page', compact('page'));
+        return view('pages.page', compact('page'));
     }
 }

@@ -3,7 +3,6 @@
 namespace Hup234design\FilamentCms;
 
 use Hup234design\FilamentCms\Commands\RegenerateMediaCurations;
-use Hup234design\FilamentCms\Components\AppLayout;
 use Hup234design\FilamentCms\Components\MediaImageRenderer;
 use Hup234design\FilamentCms\Livewire\Blocks\ContactBlock;
 use Hup234design\FilamentCms\Livewire\Blocks\EditorBlock;
@@ -42,8 +41,7 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
                 Commands\SetupCommand::class,
                 RegenerateMediaCurations::class,
             ])
-            ->hasViewComponents('cms',
-                AppLayout::class, MediaImageRenderer::class)
+            ->hasViewComponents('cms', MediaImageRenderer::class)
             ->hasViews()
             ->hasInstallCommand(function(InstallCommand $command) {
                 $command
@@ -64,6 +62,8 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        parent::packageBooted();
+
         Livewire::component('enquiry-form', EnquiryForm::class);
 
         Livewire::component('editor-block', EditorBlock::class);

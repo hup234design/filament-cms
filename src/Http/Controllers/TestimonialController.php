@@ -4,19 +4,17 @@ namespace Hup234design\FilamentCms\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 //use Hup234design\FilamentCms\Models\IndexPage;
+use Hup234design\FilamentCms\Models\IndexPage;
 use Hup234design\FilamentCms\Models\Testimonial;
 
 class TestimonialController extends Controller
 {
     public function index()
     {
-        //$page = IndexPage::where('for', 'testimonials')->firstOrFail();
-
+        $page = IndexPage::where('slug', 'testimonials')->firstOrFail();
         $testimonials = Testimonial::visible()
             ->orderBy('received_on', 'desc')
             ->paginate(3);
-
-        //return view('cms::testimonials.index', compact('page', 'testimonials'));
-        return view('cms::testimonials.index', compact('testimonials'));
+        return view('testimonials.index', compact('page', 'testimonials'));
     }
 }

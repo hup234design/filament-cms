@@ -8,7 +8,7 @@
 </head>
 <body class="antialiased">
 
-<x-cms::header :menus="$menus" />
+<x-app-header />
 
 @section('header')
 @show
@@ -20,7 +20,7 @@
     </div>
 </main>
 
-<x-cms::footer />
+<x-app-footer />
 
 @include('cookie-consent::index')
 

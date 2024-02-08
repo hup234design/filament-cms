@@ -1,6 +1,6 @@
-<x-cms::layouts.posts>
+<x-layouts.posts>
 
-    <x-cms::page-header :header="$post->header" :title="$post->title" />
+    <x-page-header :header="$post->header" :title="$post->title" />
 
     <div class="prose max-w-none">
         <h1 class="mb-2">{{ $post->title }}</h1>
@@ -39,4 +39,4 @@
         <hr>
         <a href="{{ route('posts.index', $post->slug) }}" class="no-underline">&larr; Back to all posts</a>
     </div>
-</x-cms::layouts.posts>
+</x-layouts.posts>

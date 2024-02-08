@@ -1,6 +1,6 @@
-<x-cms-app-layout>
+<x-app-layout>
 
-    <x-cms::page-header :header="$page->header" :title="$page->title" />
+    <x-page-header :header="$page->header" :title="$page->title" />
 
     <div class="prose max-w-none">
         <h1>{{ $page->title }}</h1>
@@ -24,4 +24,4 @@
             @endforeach
         </div>
     @endif
-</x-cms-app-layout>
+</x-app-layout>

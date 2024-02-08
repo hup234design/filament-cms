@@ -1,6 +1,6 @@
-<x-cms::layouts.services>
+<x-services-layout>
 
-    <x-cms::page-header :header="$service->header" :title="$service->title" />
+    <x-page-header :header="$service->header" :title="$service->title" />
 
     <div class="prose max-w-none">
         <h1 class="mb-2">{{ $service->title }}</h1>
@@ -17,4 +17,4 @@
         <hr>
         <a href="{{ route('services.index', $service->slug) }}" class="no-underline">&larr; Back to all services</a>
     </div>
-</x-cms::layouts.services>
+</x-services-layout>

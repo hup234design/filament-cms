@@ -1,6 +1,10 @@
-<x-cms::layouts.posts>
+<x-layouts.posts>
 
-    <x-cms::page-header title="Posts" />
+    <x-page-header title="Posts" :subtitle="$category->title"  />
+
+    <div class="prose max-w-none">
+        <h1>Posts | {{ $category->title }}</h1>
+    </div>
 
     <div class="mt-12 space-y-12">
         @foreach( $posts as $post )
@@ -8,12 +12,6 @@
                 <h2 class="mb-2">{{ $post->title }}</h2>
                 <p class="flex gap-2 text-sm">
                     <span>{{ $post->publish_at }}</span>
-                    @if( $post->post_category_id )
-                        <span>//</span>
-                        <a href="{{ route('posts.category', $post->post_category->slug) }}">
-                            {{ $post->post_category->title }}
-                        </a>
-                    @endif
                 </p>
                 <p>{{ nl2br($post->summary) }}</p>
                 <a href="{{ route('posts.post', $post->slug) }}" class="no-underline">Read More &rarr;</a>
@@ -28,4 +26,8 @@
         </div>
     @endif
 
-</x-cms::layouts.posts>
+    <hr class="my-12">
+
+    <a href="{{ route('posts.index', $post->slug) }}" class="no-underline">&larr; Back to all posts</a>
+
+</x-layouts.posts>

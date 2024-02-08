@@ -1,18 +1,11 @@
-<x-cms::layouts.services>
+<x-services-layout>
 
-    <x-cms::page-header title="Services" />
+    <x-page-header title="Services" :subtitle="$category->title"  />
 
     <div class="mt-12 space-y-12">
         @foreach( $services as $service )
             <div class="prose max-w-none">
                 <h2 class="mb-2">{{ $service->title }}</h2>
-                @if( $service->service_category_id )
-                    <p class="text-sm">
-                        <a href="{{ route('services.category', $service->service_category->slug) }}">
-                            {{ $service->service_category->title }}
-                        </a>
-                    </p>
-                @endif
                 <p>{{ nl2br($service->summary) }}</p>
                 <a href="{{ route('services.service', $service->slug) }}" class="no-underline">Read More &rarr;</a>
             </div>
@@ -26,4 +19,8 @@
         </div>
     @endif
 
-</x-cms::layouts.services>
+    <hr class="my-12">
+
+    <a href="{{ route('services.index', $service->slug) }}" class="no-underline">&larr; Back to all services</a>
+
+</x-services-layout>

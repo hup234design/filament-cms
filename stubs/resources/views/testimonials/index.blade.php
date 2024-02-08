@@ -1,6 +1,6 @@
-<x-cms-app-layout>
+<x-app-layout>
 
-    <x-cms::page-header heading="Testimonials" />
+    <x-page-header heading="Testimonials" />
 
     <div class="mt-16 space-y-12">
         @foreach($testimonials as $testimonial)
@@ -22,4 +22,4 @@
         </div>
     @endif
 
-</x-cms-app-layout>
+</x-app-layout>
