@@ -1,4 +1,4 @@
-<x-layouts.posts>
+<x-posts-layout>
 
     <x-page-header title="Posts" :subtitle="$category->title"  />
 
@@ -30,4 +30,4 @@
 
     <a href="{{ route('posts.index', $post->slug) }}" class="no-underline">&larr; Back to all posts</a>
 
-</x-layouts.posts>
+</x-posts-layout>

@@ -1,4 +1,4 @@
-<x-layouts.posts>
+<x-posts-layout>
 
     <x-page-header :header="$post->header" :title="$post->title" />
 
@@ -39,4 +39,4 @@
         <hr>
         <a href="{{ route('posts.index', $post->slug) }}" class="no-underline">&larr; Back to all posts</a>
     </div>
-</x-layouts.posts>
+</x-posts-layout>
