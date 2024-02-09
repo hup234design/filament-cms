@@ -36,23 +36,29 @@ class TestimonialResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name'),
+                Forms\Components\TextInput::make('name')
+                    ->required(),
                 Forms\Components\TextInput::make('location'),
                 Forms\Components\TextInput::make('company'),
                 Forms\Components\TextInput::make('job_title'),
-                Forms\Components\Textarea::make('content'),
-                Forms\Components\DatePicker::make('received_on')->default(Carbon::now()),
-                Forms\Components\Toggle::make('is_visible')->default(true)
+                Forms\Components\Textarea::make('content')
+                    ->required()
+                    ->rows(6)
+                    ->columnSpanFull(),
+                Forms\Components\DatePicker::make('received_on')
+                    ->required()
+                    ->default(Carbon::now()),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('received_on', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('received_on')
                     ->label('Received')
-                    ->dateTime()
+                    ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
@@ -61,13 +67,17 @@ class TestimonialResource extends Resource
                 Tables\Columns\TextColumn::make('company')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('job_title')
+                    ->label('Job Title')
                     ->searchable(),
-                Tables\Columns\ToggleColumn::make('is_visible'),
+                Tables\Columns\ToggleColumn::make('is_visible')
+                    ->label('Visible?'),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Created')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Last Updated')
                     ->since()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
