@@ -7,6 +7,8 @@ use Hup234design\FilamentCms\Components\MediaImageRenderer;
 use Hup234design\FilamentCms\Livewire\Blocks\ContactBlock;
 use Hup234design\FilamentCms\Livewire\Blocks\EditorBlock;
 use Hup234design\FilamentCms\Livewire\Blocks\EmployeesBlock;
+use Hup234design\FilamentCms\Livewire\Blocks\LatestPostsBlock;
+use Hup234design\FilamentCms\Livewire\Blocks\TestimonialsBlock;
 use Hup234design\FilamentCms\Livewire\Enquiries\EnquiryForm;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
@@ -69,6 +71,8 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
         Livewire::component('editor-block', EditorBlock::class);
         Livewire::component('employees-block', EmployeesBlock::class);
         Livewire::component('contact-block', ContactBlock::class);
+        Livewire::component('latest-posts-block', LatestPostsBlock::class);
+        Livewire::component('testimonials-block', TestimonialsBlock::class);
 
         //Blade::component('curator-glider', Glider::class);
     }

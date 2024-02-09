@@ -6,6 +6,8 @@ use Filament\Forms\Components\Builder;
 use Hup234design\FilamentCms\Livewire\Blocks\ContactBlock;
 use Hup234design\FilamentCms\Livewire\Blocks\EditorBlock;
 use Hup234design\FilamentCms\Livewire\Blocks\EmployeesBlock;
+use Hup234design\FilamentCms\Livewire\Blocks\LatestPostsBlock;
+use Hup234design\FilamentCms\Livewire\Blocks\TestimonialsBlock;
 
 class ContentBlocksBuilder
 {
@@ -22,6 +24,8 @@ class ContentBlocksBuilder
                 EditorBlock::make(),
                 EmployeesBlock::make(),
                 ContactBlock::make(),
+                LatestPostsBlock::make(),
+                TestimonialsBlock::make(),
                 ...array_map(function ($class) {
                     return $class::make();
                 }, config('cms.content_blocks'))
