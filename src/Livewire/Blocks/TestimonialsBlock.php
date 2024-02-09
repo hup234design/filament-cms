@@ -17,6 +17,6 @@ class TestimonialsBlock extends ContentBlockTemplate
 
     public function render()
     {
-        return view('cms::livewire.blocks.testimonials');
+        return view('cms::livewire.blocks.testimonials-block');
     }
 }
