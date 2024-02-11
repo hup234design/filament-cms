@@ -66,6 +66,7 @@ abstract class ContentBlockTemplate extends Component
                                             ])
                                             ->inline()
                                             ->live()
+                                            ->required()
                                             ->default('center'),
                                         TextInput::make('header_title')
                                             ->label('Header Title')

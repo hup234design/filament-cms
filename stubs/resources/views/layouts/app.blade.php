@@ -13,11 +13,12 @@
 @section('header')
 @show
 
-
-<main class="my-16">
-    <div class="max-w-screen-2xl mx-auto px-8">
+<main class="mt-20">
+    <div class="container">
         {{ $slot }}
     </div>
+    @section('blocks')
+    @show
 </main>
 
 <x-app-footer />

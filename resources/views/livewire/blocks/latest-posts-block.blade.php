@@ -1,5 +1,4 @@
 <div>
-    <h2 class="text-3xl font-bold text-center mb-12">Latest Posts</h2>
     <div class="grid gap-8 lg:grid-cols-3">
         @foreach( $posts as $post )
             <div @class([
