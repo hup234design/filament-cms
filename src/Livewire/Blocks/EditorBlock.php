@@ -7,7 +7,7 @@ use FilamentTiptapEditor\TiptapEditor;
 
 class EditorBlock extends ContentBlockTemplate
 {
-    protected static bool $includeHeader = false;
+    //protected static bool $includeHeader = false;
 
     protected static function makeFilamentSchema(): array|\Closure
     {
