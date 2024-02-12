@@ -91,6 +91,18 @@ class TestimonialsBlock extends ContentBlockTemplate
 
     public function render()
     {
-        return view('cms::livewire.blocks.testimonials-block');
+        $testimonial = null;
+        $testimonials = [];
+        if( $this->blockData['random'] ?? false ) {
+            if( ($this->blockData['selection'] ?? 'single') == 'single' ) {
+                $testimonial = Testimonial::inRandomOrder()
+                    ->first();
+            } else {
+                $testimonials = Testimonial::inRandomOrder()
+                    ->take($this->blockData['random_count'] ?? 1)
+                    ->get();
+            }
+        }
+        return view('cms::livewire.blocks.testimonials-block', compact('testimonial','testimonials'));
     }
 }
