@@ -5,6 +5,7 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
         "./vendor/hup234design/filament-cms/**/*.php",
+        "./vendor/filament/support/**/*.blade.php",
     ],
     theme: {
         container: {

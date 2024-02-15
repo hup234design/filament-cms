@@ -135,16 +135,14 @@ class ManageSettings extends Page
                         ->schema([
                             Forms\Components\Select::make('state.primary_header_menu_id')
                                 ->label('Primary Header Menu')
-                                ->options(Navigation::where('parent_id', -1)->pluck('title','id'))
-                                ->required(),
+                                ->options(Navigation::where('parent_id', -1)->pluck('title','id')),
                             Forms\Components\Select::make('state.secondary_header_menu_id')
                                 ->label('Secondary Header Menu')
                                 ->options(Navigation::where('parent_id', -1)->pluck('title','id'))
                                 ->helperText('This will only be used if configured in site theme'),
                             Forms\Components\Select::make('state.primary_footer_menu_id')
                                 ->label('Primary Footer Menu')
-                                ->options(Navigation::where('parent_id', -1)->pluck('title','id'))
-                                ->required(),
+                                ->options(Navigation::where('parent_id', -1)->pluck('title','id')),
                             Forms\Components\Select::make('state.secondary_footer_menu_id')
                                 ->label('Secondary Footer Menu')
                                 ->options(Navigation::where('parent_id', -1)->pluck('title','id'))

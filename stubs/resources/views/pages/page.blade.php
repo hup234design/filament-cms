@@ -10,5 +10,4 @@
     </div>
 
     <x-cms::blocks :blocks="$page->blocks" />
-
 </x-app-layout>

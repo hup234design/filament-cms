@@ -87,6 +87,14 @@ class SetupCommand extends Command
                     __DIR__ . '/../../stubs/resources/css',
                     resource_path('css')
                 );
+                (new Filesystem())->copyDirectory(
+                    __DIR__ . '/../../stubs/resources/js',
+                    resource_path('js')
+                );
+                (new Filesystem())->copyDirectory(
+                    __DIR__ . '/../../stubs/resources/views',
+                    resource_path('views')
+                );
                 (new Filesystem())->copy(
                     __DIR__ . '/../../stubs/tailwind.config.js',
                     base_path('tailwind.config.js')
@@ -99,6 +107,33 @@ class SetupCommand extends Command
                     __DIR__ . '/../../stubs/vite.config.js',
                     base_path('vite.config.js')
                 );
+                (new Filesystem())->copy(
+                    __DIR__ . '/../../stubs/app/View/Components/AppLayout.php.stub',
+                    app_path('View/Components/AppLayout.php')
+                );
+                (new Filesystem())->copy(
+                    __DIR__ . '/../../stubs/app/View/Components/PostsLayout.php.stub',
+                    app_path('View/Components/PostsLayout.php')
+                );
+                (new Filesystem())->copy(
+                    __DIR__ . '/../../stubs/app/View/Components/ServicesLayout.php.stub',
+                    app_path('View/Components/ServicesLayout.php')
+                );
+                (new Filesystem())->copy(
+                    __DIR__ . '/../../stubs/app/View/Components/AppHeader.php.stub',
+                    app_path('View/Components/AppHeader.php')
+                );
+                (new Filesystem())->copy(
+                    __DIR__ . '/../../stubs/app/View/Components/AppFooter.php.stub',
+                    app_path('View/Components/AppFooter.php')
+                );
+            }
+
+            if ($this->confirm("Do you want seed the Index Pages?",false)){
+                $this->call('db:seed', [
+                    "--class" => "Hup234design\\FilamentCms\\Database\\Seeders\\IndexPageSeeder",
+                ]);
+
             }
 
             $this->runCommands([
