@@ -14,6 +14,8 @@ class ManageEmployees extends ManageRecords
     {
         return [
             Actions\CreateAction::make()
+                ->icon('heroicon-m-plus')
+                ->label('New Employee')
                 ->slideOver(),
         ];
     }

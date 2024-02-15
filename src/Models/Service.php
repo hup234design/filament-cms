@@ -7,11 +7,14 @@ use Hup234design\FilamentCms\Concerns\HasMediables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-//use RalphJSmit\Laravel\SEO\Support\HasSEO;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 
-class Service extends Model
+class Service extends Model implements Sortable
 {
-    //use HasSEO;
+    use SortableTrait;
+    use HasSEO;
     use HasMediables;
     use HasHeader;
 

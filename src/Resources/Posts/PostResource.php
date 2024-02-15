@@ -9,6 +9,7 @@ use FilamentTiptapEditor\Enums\TiptapOutput;
 use FilamentTiptapEditor\TiptapEditor;
 use Hup234design\FilamentCms\Filament\Forms\Components\MediablePreview;
 use Hup234design\FilamentCms\Filament\Forms\Fields\FeaturedImage;
+use Hup234design\FilamentCms\Forms\Components\CmsGridLayout;
 use Hup234design\FilamentCms\Forms\Fields\ContentBlocksBuilder;
 use Hup234design\FilamentCms\Forms\Fields\Header;
 use Hup234design\FilamentCms\Forms\Fields\MediablePicker;
@@ -46,45 +47,60 @@ class PostResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            TitleSlug::make(static::$model)
-                ->columns(2)
-                ->columnSpanFull(),
+            CmsGridLayout::make([
+                Forms\Components\Tabs::make('Tabs')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('General')
+                            ->schema([
+                                TitleSlug::make(static::$model)
+                                    ->columns(2)
+                                    ->columnSpanFull(),
+                                Forms\Components\Textarea::make('summary')
+                                    ->required()
+                                    ->rows(3)
+                                    ->columnSpanFull(),
+                                TiptapEditor::make('content')
+                                    ->profile('cms')
+                                    ->maxWidth('full')
+                                    ->output(TiptapOutput::Json)
+                                    ->columnSpanFull(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Featured Image')
+                            ->schema([
+                                MediablePicker::make("featured_image", "featured")->columnSpanFull(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Header')
+                            ->schema([
+                                Header::make()->columnSpanFull(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Content Blocks')
+                            ->schema([
+                                ContentBlocksBuilder::make()
+                            ]),
+                        Forms\Components\Tabs\Tab::make('SEO')
+                            ->schema([
+                                SEO::make(['title','description']),
+                                MediablePicker::make("seo_image", "seo")->columnSpanFull(),
+                            ]),
+                    ])
+            ],[
+                Forms\Components\Section::make([
+                    Forms\Components\Select::make('post_category_id')
+                        ->label('Category')
+                        ->options(PostCategory::all()->pluck('title','id')),
 
-            Forms\Components\Textarea::make('summary')
-                ->required()
-                ->rows(3)
-                ->columnSpanFull(),
+                    Forms\Components\DateTimePicker::make('publish_at')
+                        ->label('Publish At')
+                        ->default(Carbon::now())
+                        ->seconds(false)
+                        ->columnSpanFull(),
 
-            Header::make()
-                ->columnSpanFull(),
-
-            MediablePicker::make()
-                ->columnSpanFull(),
-
-            TiptapEditor::make('content')
-                ->profile('minimal')
-                ->output(TiptapOutput::Json)
-                ->columnSpanFull(),
-
-            Forms\Components\Group::make()
-                ->schema([
-                    ContentBlocksBuilder::make()
+                    Forms\Components\Toggle::make('is_visible')
+                        ->label('Visible')
+                        ->default(true)
+                        ->columnSpanFull(),
                 ])
-                ->columnSpanFull(),
-
-            Forms\Components\Select::make('post_category_id')
-                ->label('Category')
-                ->options(PostCategory::all()->pluck('title','id')),
-
-            Forms\Components\DateTimePicker::make('publish_at')
-                ->label('Publish At')
-                ->default(Carbon::now())
-                ->columnSpanFull(),
-
-            Forms\Components\Toggle::make('is_visible')
-                ->label('Visible')
-                ->default(true)
-                ->columnSpanFull(),
+            ]),
         ]);
     }
 
@@ -105,19 +121,21 @@ class PostResource extends Resource
 
                 Tables\Columns\TextColumn::make('publish_at')
                     ->label('Publish At')
-                    ->dateTime(),
+                    ->date(),
 
                 Tables\Columns\ToggleColumn::make('is_visible')
                     ->label('Visible?')
                     ->disabled(fn(Post $record) => $record->is_home),
 
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Updated')
+                    ->since()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Created')
+                    ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -126,6 +144,7 @@ class PostResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -13,9 +13,12 @@ class ManagePostCategories extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
-            Actions\Action::make('Manage Posts')
-                ->color('info')
+            Actions\CreateAction::make()
+                ->icon('heroicon-m-plus')
+                ->label('New Category'),
+            Actions\Action::make('Posts')
+                ->icon('heroicon-m-arrow-uturn-left')
+                ->outlined(true)
                 ->url('/admin/posts/posts')
         ];
     }

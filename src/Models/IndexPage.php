@@ -2,12 +2,16 @@
 
 namespace Hup234design\FilamentCms\Models;
 
+use Hup234design\FilamentCms\Concerns\HasHeader;
+use Hup234design\FilamentCms\Concerns\HasMediables;
 use Illuminate\Database\Eloquent\Model;
-//use RalphJSmit\Laravel\SEO\Support\HasSEO;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
 
 class IndexPage extends Model
 {
-    //use HasSEO;
+    use HasSEO;
+    use HasMediables;
+    use HasHeader;
 
     protected $guarded = [];
 

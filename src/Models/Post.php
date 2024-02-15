@@ -7,11 +7,13 @@ use Hup234design\FilamentCms\Concerns\HasMediables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
+
 //use RalphJSmit\Laravel\SEO\Support\HasSEO;
 
 class Post extends Model
 {
-    //use HasSEO;
+    use HasSEO;
     use HasMediables;
     use HasHeader;
 

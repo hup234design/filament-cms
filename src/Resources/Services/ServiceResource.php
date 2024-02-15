@@ -10,7 +10,12 @@ use FilamentTiptapEditor\TiptapEditor;
 use Hup234design\FilamentCms\Filament\Forms\Components\MediablePreview;
 use Hup234design\FilamentCms\Filament\Forms\Fields\FeaturedImage;
 use Hup234design\FilamentCms\Filament\Forms\SidebarLayout;
+use Hup234design\FilamentCms\Forms\Components\CmsGridLayout;
+use Hup234design\FilamentCms\Forms\Fields\ContentBlocksBuilder;
+use Hup234design\FilamentCms\Forms\Fields\Header;
+use Hup234design\FilamentCms\Forms\Fields\MediablePicker;
 use Hup234design\FilamentCms\Forms\Fields\TitleSlug;
+use Hup234design\FilamentCms\Models\PostCategory;
 use Hup234design\FilamentCms\Resources\Services\ServiceResource\Pages;
 use Hup234design\FilamentCms\Resources\Services\ServiceResource\RelationManagers;
 use Hup234design\FilamentCms\Models\Page;
@@ -48,35 +53,61 @@ class ServiceResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            TitleSlug::make(static::$model)
-                ->columns(2)
-                ->columnSpanFull(),
-
-            Forms\Components\Textarea::make('summary')
-                ->required()
-                ->rows(3)
-                ->columnSpanFull(),
-
-            TiptapEditor::make('content')
-                ->profile('minimal')
-                ->output(TiptapOutput::Json)
-                ->columnSpanFull(),
-
-            Forms\Components\Select::make('service_category_id')
-                ->label('Category')
-                ->options(ServiceCategory::all()->pluck('title','id')),
-
-            Forms\Components\Toggle::make('is_visible')
-                ->label('Visible')
-                ->default(true)
-                ->columnSpanFull(),
+            CmsGridLayout::make([
+                Forms\Components\Tabs::make('Tabs')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('General')
+                            ->schema([
+                                TitleSlug::make(static::$model)
+                                    ->columns(2)
+                                    ->columnSpanFull(),
+                                Forms\Components\Textarea::make('summary')
+                                    ->required()
+                                    ->rows(3)
+                                    ->columnSpanFull(),
+                                TiptapEditor::make('content')
+                                    ->profile('cms')
+                                    ->maxWidth('full')
+                                    ->output(TiptapOutput::Json)
+                                    ->columnSpanFull(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Featured Image')
+                            ->schema([
+                                MediablePicker::make("featured_image", "featured")->columnSpanFull(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Header')
+                            ->schema([
+                                Header::make()->columnSpanFull(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Content Blocks')
+                            ->schema([
+                                ContentBlocksBuilder::make()
+                            ]),
+                        Forms\Components\Tabs\Tab::make('SEO')
+                            ->schema([
+                                SEO::make(['title','description']),
+                                MediablePicker::make("seo_image", "seo")->columnSpanFull(),
+                            ]),
+                    ])
+            ],[
+                Forms\Components\Section::make([
+                    Forms\Components\Select::make('service_category_id')
+                        ->label('Category')
+                        ->options(ServiceCategory::all()->pluck('title','id')),
+                    Forms\Components\Toggle::make('is_visible')
+                        ->label('Visible')
+                        ->default(true)
+                        ->columnSpanFull(),
+                ])
+            ]),
         ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultSort('publish_at', 'desc')
+            ->reorderable('order_column')
+            ->defaultSort('order_column', 'asc')
             ->columns([
 
                 Tables\Columns\TextColumn::make('title')
@@ -92,13 +123,15 @@ class ServiceResource extends Resource
                     ->label('Visible?')
                     ->disabled(fn(Service $record) => $record->is_home),
 
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Updated')
+                    ->since()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Created')
+                    ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -107,6 +140,7 @@ class ServiceResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -78,7 +78,7 @@ class SetupCommand extends Command
 
             if ($this->confirm("Do you want to install NPM packages?",false)){
                 $this->runCommands([
-                    'npm install -D tailwindcss postcss autoprefixer @tailwindcss/typography @tailwindcss/forms cropperjs'
+                    'npm install -D tailwindcss postcss autoprefixer @tailwindcss/typography @tailwindcss/forms cropperjs swiper'
                 ]);
             }
 

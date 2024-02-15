@@ -43,17 +43,24 @@ class ServiceCategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('order_column')
+            ->defaultSort('order_column', 'asc')
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('services_count')
+                    ->label('Services')
+                    ->counts('services'),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Updated')
+                    ->since()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Created')
+                    ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

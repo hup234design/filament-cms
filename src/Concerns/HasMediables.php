@@ -13,6 +13,12 @@ trait HasMediables
             ->where('type', 'featured');
     }
 
+    public function header_image(): MorphOne
+    {
+        return $this->morphOne(Mediable::class, 'mediable')
+            ->where('type', 'header');
+    }
+
     public function seo_image(): MorphOne
     {
         return $this->morphOne(Mediable::class, 'mediable')

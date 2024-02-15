@@ -5,7 +5,10 @@ namespace Hup234design\FilamentCms\Resources\Pages;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 use FilamentTiptapEditor\Enums\TiptapOutput;
 use FilamentTiptapEditor\TiptapEditor;
+use Hup234design\FilamentCms\Forms\Components\CmsGridLayout;
 use Hup234design\FilamentCms\Forms\Fields\ContentBlocksBuilder;
+use Hup234design\FilamentCms\Forms\Fields\Header;
+use Hup234design\FilamentCms\Forms\Fields\MediablePicker;
 use Hup234design\FilamentCms\Forms\Fields\TitleSlug;
 use Hup234design\FilamentCms\Resources\Pages\PageResource\Pages;
 use Hup234design\FilamentCms\Resources\Pages\PageResource\RelationManagers;
@@ -17,6 +20,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
+use RalphJSmit\Filament\Components\Forms\Timestamps;
+use RalphJSmit\Filament\SEO\SEO;
 
 class PageResource extends Resource
 {
@@ -42,38 +47,55 @@ class PageResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            TitleSlug::make(static::$model)
-                ->columns(2)
-                ->columnSpanFull(),
-
-            TiptapEditor::make('content')
-                ->profile('cms')
-                ->maxWidth('full')
-                ->output(TiptapOutput::Json)
-                ->columnSpanFull(),
-
-            Forms\Components\Group::make()
-                ->schema([
-                    ContentBlocksBuilder::make()
+            CmsGridLayout::make([
+                Forms\Components\Tabs::make('Tabs')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('General')
+                            ->schema([
+                                TitleSlug::make(static::$model)
+                                    ->columns(2)
+                                    ->columnSpanFull(),
+                                TiptapEditor::make('content')
+                                    ->profile('cms')
+                                    ->maxWidth('full')
+                                    ->output(TiptapOutput::Json)
+                                    ->columnSpanFull(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Header')
+                            ->schema([
+                                Header::make()->columnSpanFull(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Content Blocks')
+                            ->schema([
+                                ContentBlocksBuilder::make()
+                            ]),
+                        Forms\Components\Tabs\Tab::make('SEO')
+                            ->schema([
+                                SEO::make(['title','description']),
+                                MediablePicker::make("seo_image", "seo")->columnSpanFull(),
+                            ]),
+                    ])
+            ],[
+                Forms\Components\Section::make([
+                    Forms\Components\Toggle::make('is_home')
+                        ->label('Home Page')
+                        ->default(false)
+                        ->live()
+                        ->columnSpanFull(),
+                    Forms\Components\Toggle::make('is_visible')
+                        ->label('Visible')
+                        ->default(true)
+                        ->columnSpanFull()
+                        ->hidden(fn(Forms\Get $get) => $get('is_home')),
                 ])
-                ->columnSpanFull(),
-
-            Forms\Components\Toggle::make('is_home')
-                ->label('Home Page')
-                ->default(false)
-                ->live()
-                ->columnSpanFull(),
-            Forms\Components\Toggle::make('is_visible')
-                ->label('Visible')
-                ->default(true)
-                ->columnSpanFull()
-                ->hidden(fn(Forms\Get $get) => $get('is_home')),
+            ]),
         ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('order_column')
             ->columns([
                 Tables\Columns\IconColumn::make('is_home')
                     ->label(false)
@@ -91,12 +113,15 @@ class PageResource extends Resource
                     ->label('Visible?')
                     ->disabled(fn(Page $record) => $record->is_home),
 
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Updated')
+                    ->since()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Created')
+                    ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -105,6 +130,7 @@ class PageResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -7,13 +7,14 @@ use Hup234design\FilamentCms\Concerns\HasMediables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 //use RalphJSmit\Laravel\SEO\Support\HasSEO;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
 class Page extends Model implements Sortable
 {
     use SortableTrait;
-    //use HasSEO;
+    use HasSEO;
     use HasMediables;
     use HasHeader;
 

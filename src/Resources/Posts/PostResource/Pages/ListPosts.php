@@ -13,9 +13,12 @@ class ListPosts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
-            Actions\Action::make('Manage Categories')
-                ->color('info')
+            Actions\CreateAction::make()
+                ->icon('heroicon-m-plus')
+                ->label('New Post'),
+            Actions\Action::make('Categories')
+                ->icon('heroicon-m-list-bullet')
+                ->outlined(true)
                 ->url('/admin/posts/post-categories')
         ];
     }

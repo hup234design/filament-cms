@@ -30,7 +30,7 @@ class EmployeeResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\TextInput::make('job_title'),
-                MediablePicker::make()
+                MediablePicker::make("featured_image","featured")
                     ->columnSpanFull(),
                 Forms\Components\RichEditor::make('bio')
                     ->columnSpanFull(),
