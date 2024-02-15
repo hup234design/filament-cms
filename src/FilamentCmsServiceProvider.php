@@ -37,7 +37,6 @@ class FilamentCmsServiceProvider extends PackageServiceProvider
                 'create_enquiries_table',
             ])
             ->hasViews('cms')
-            //->hasRoute('web')
             ->hasConfigFile(['cms','curator','filament-tiptap-editor','filament-tree'])
             ->hasCommands([
                 Commands\SetupCommand::class,
